@@ -1,2 +1,2 @@
-# neon-animated-pages-demo
-Serving demos for neon-animated-pages
+# neon-animated-pages-demos
+Serving demos for PolymerElements/neon-animated-pages

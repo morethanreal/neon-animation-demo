@@ -1,0 +1,22 @@
+{
+  "name": "test-fixture",
+  "version": "0.9.0",
+  "description": "A simple element to fixture DOM for tests.",
+  "dependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "*",
+    "polymer": "polymer/polymer#v0.9.0-rc.1"
+  },
+  "homepage": "https://github.com/PolymerElements/test-fixture",
+  "_release": "0.9.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.0",
+    "commit": "ab7e8cf657eace4a9627d98d0c4db7b5214757f6"
+  },
+  "_source": "git://github.com/PolymerElements/test-fixture.git",
+  "_target": "^0.9.0",
+  "_originalSource": "PolymerElements/test-fixture"
+}

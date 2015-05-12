@@ -1,0 +1,27 @@
+{
+  "name": "iron-meta",
+  "version": "0.9.0",
+  "private": true,
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#v0.9.0-rc.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "polymerelements/iron-component-page#^0.9.0",
+    "test-fixture": "polymerelements/test-fixture#^0.9.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0",
+    "web-component-tester": "*"
+  },
+  "homepage": "https://github.com/PolymerElements/iron-meta",
+  "_release": "0.9.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.0",
+    "commit": "10711392fb96b3e99ece97743476833d4b18d630"
+  },
+  "_source": "git://github.com/PolymerElements/iron-meta.git",
+  "_target": "^0.9.0",
+  "_originalSource": "PolymerElements/iron-meta"
+}
