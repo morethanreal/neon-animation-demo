@@ -13,52 +13,66 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   Polymer.NeonAnimatableBehavior = {
 
-    properties: {
-
-      _animatables: {
-        type: Array,
-        value: function() {
-          return [];
-        }
+    _cloneConfig: function(config) {
+      var clone = {};
+      for (property in config) {
+        clone[property] = config[property];
       }
+      return clone;
     },
 
-    listeners: {
-      'neon-animatable-attached': '_onAnimatableAttached',
-      'neon-animatable-detached': '_onAnimatableDetached'
-    },
+    _mergeConfigs: function(map, allConfigs, configs) {
+      // map should contain all the configs seen so far with an id
+      for (var config, index = 0; config = configs[index]; index++) {
 
-    _onAnimatableAttached: function(event) {
-      // FIXME need to debug behavior weirdness
-      this.async(function() {
-        if (event.target !== this) {
-          this._animatables.push(event.target);
-          event.stopPropagation();
+        if (config.id) {
+
+          if (map[config.id]) {
+            // if a config with the same id is in the map, merge the configs
+            for (var property in config) {
+              map[config.id][property] = config[property];
+            }
+          } else {
+            // otherwise put this in the map
+            map[config.id] = this._cloneConfig(config);
+          }
+
+        } else {
+          allConfigs.push(config);
         }
-      });
-    },
 
-    _onAnimatableDetached: function(event) {
-      // FIXME: remove from _animatables
-    },
-
-    attached: function() {
-      this.fire('neon-animatable-attached');
-    },
-
-    detached: function() {
-      this.fire('neon-animatable-detached');
+      }
+      return allConfigs;
     },
 
     getAnimationConfig: function(type) {
-      var config = [];
-      if (this._animationConfig) {
-        config = config.concat(this._animationConfig[type]);
+      if (!this._animationConfig) {
+        return [];
       }
-      for (var animatable, index = 0; animatable = this._animatables[index]; index++) {
-        config = config.concat(animatable.getAnimationConfig(type));
+
+      var allConfigs = [];
+      var map = [];
+      // type is optional
+      var thisConfig = (type !== undefined) ? this._animationConfig[type] : this._animationConfig;
+      if (thisConfig) {
+        for (var config, index = 0; config = thisConfig[index]; index++) {
+          if (config.animatable) {
+            allConfigs = this._mergeConfigs(map, allConfigs, config.animatable.getAnimationConfig(config.type || type));
+          } else {
+            // put any configs with an id into a map
+            if (config.id) {
+              map[config.id] = this._cloneConfig(config);
+            } else {
+              allConfigs.push(config);
+            }
+          }
+        }
+        // append merged configs
+        for (var key in map) {
+          allConfigs.push(map[key]);
+        }
       }
-      return config;
+      return allConfigs;
     }
 
   };
