@@ -1,6 +1,7 @@
 {
   "name": "paper-toolbar",
-  "version": "0.9.0",
+  "version": "0.9.1",
+  "description": "A material design toolbar that is easily customizable",
   "private": true,
   "main": [
     "paper-toolbar.html"
@@ -8,13 +9,20 @@
   "authors": [
     "The Polymer Authors"
   ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "paper",
+    "toolbar",
+    "layout"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/PolymerElements/paper-toolbar.git"
   },
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.9.0-rc.1",
-    "paper-styles": "PolymerElements/paper-styles#^0.9.0"
+    "paper-styles": "PolymerElements/paper-styles#^0.9.0",
+    "polymer": "Polymer/polymer#^0.9.0"
   },
   "devDependencies": {
     "iron-icon": "PolymerElements/iron-icon#^0.9.0",
@@ -22,17 +30,16 @@
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^0.9.0",
     "test-fixture": "PolymerElements/test-fixture#^0.9.0",
     "web-component-tester": "~2.2.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/PolymerElements/paper-toolbar",
-  "_release": "0.9.0",
+  "_release": "0.9.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.9.0",
-    "commit": "96e012228b2bef85c6b49e965961d5e59f06a468"
+    "tag": "v0.9.1",
+    "commit": "5781052eae6fde2241fa8270253024395abbe6f3"
   },
   "_source": "git://github.com/PolymerElements/paper-toolbar.git",
   "_target": "~0.9.0",
-  "_originalSource": "PolymerElements/paper-toolbar",
-  "_direct": true
+  "_originalSource": "PolymerElements/paper-toolbar"
 }

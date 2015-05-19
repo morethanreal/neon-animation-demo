@@ -1,6 +1,6 @@
 {
   "name": "paper-item",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "authors": [
     "The Polymer Authors"
   ],
@@ -23,8 +23,8 @@
   "homepage": "https://github.com/PolymerElements/paper-item",
   "ignore": [],
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.9.0-rc.1",
-    "paper-styles": "PolymerElements/paper-styles#^0.9.0"
+    "paper-styles": "PolymerElements/paper-styles#^0.9.0",
+    "polymer": "Polymer/polymer#^0.9.0"
   },
   "devDependencies": {
     "iron-icon": "PolymerElements/iron-icon#^0.9.0",
@@ -34,16 +34,15 @@
     "iron-component-page": "PolymerElements/iron-component-page#^0.9.0",
     "test-fixture": "PolymerElements/test-fixture#^0.9.0",
     "web-component-tester": "*",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "_release": "0.9.0",
+  "_release": "0.9.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.9.0",
-    "commit": "839331eafd4ca1040646a042bff5ab6bac4d9ab0"
+    "tag": "v0.9.1",
+    "commit": "89e5f8e74b756f07912e43ddd6d7938eab0c8991"
   },
   "_source": "git://github.com/PolymerElements/paper-item.git",
   "_target": "^0.9.0",
-  "_originalSource": "PolymerElements/paper-item",
-  "_direct": true
+  "_originalSource": "PolymerElements/paper-item"
 }

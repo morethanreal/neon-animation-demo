@@ -1,26 +1,27 @@
 {
   "name": "iron-behaviors",
-  "version": "0.9.0",
+  "version": "0.9.2",
+  "description": "Provides a set of behaviors for the iron elements",
   "private": true,
   "authors": [
     "The Polymer Authors"
   ],
   "license": "MIT",
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.9.0-rc.1"
+    "polymer": "Polymer/polymer#^0.9.0"
   },
   "devDependencies": {
     "iron-test-helpers": "polymerelements/iron-test-helpers#^0.9.0",
     "test-fixture": "polymerelements/test-fixture#^0.9.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0",
-    "web-component-tester": "*"
+    "web-component-tester": "*",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/PolymerElements/iron-behaviors",
-  "_release": "0.9.0",
+  "_release": "0.9.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.9.0",
-    "commit": "aa188ab6396b5ad068ddf670e069a2e58dcf6baf"
+    "tag": "v0.9.2",
+    "commit": "2aeecb6ac3b3aa9ec87fefa7e1c601fb0300bb32"
   },
   "_source": "git://github.com/PolymerElements/iron-behaviors.git",
   "_target": "^0.9.0",
