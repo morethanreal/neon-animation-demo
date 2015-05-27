@@ -92,10 +92,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     _downHandler: function() {
       this._setPressed(true);
+      this._setFocused(true);
     },
 
     _upHandler: function(e) {
       this._setPressed(false);
+      this._setFocused(false);
     },
 
     _spaceKeyUpHandler: function(e) {
@@ -127,7 +129,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     _controlStateChanged: function() {
       if (this.disabled) {
         this._setPressed(false);
-        this.active = false;
       } else {
         this._changedButtonState();
       }

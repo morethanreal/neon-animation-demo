@@ -7,6 +7,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<link rel="import" href="../polymer/polymer.html">
+
 <!--
 `paper-ripple` provides a visual effect that other paper elements can
 use to simulate a rippling effect emanating from the point of contact.  The
@@ -49,13 +51,18 @@ attribute to have the ripple grow toward the center of its container.
 
     <paper-ripple recenters></paper-ripple>
 
+You can also  center the ripple inside its container from the start.
+
+    <paper-ripple center></paper-ripple>
+
 Apply `circle` class to make the rippling effect within a circle.
 
     <paper-ripple class="circle"></paper-ripple>
 
 @group Paper Elements
 @element paper-ripple
-@homepage github.io
+@hero hero.svg
+@demo demo/index.html
 -->
 
 <!--
@@ -66,8 +73,6 @@ animation finishes to perform some action.
 @param {Object} detail
 @param {Object} detail.node The animated node
 -->
-
-<link rel="import" href="../polymer/polymer.html">
 
 <dom-module id="paper-ripple">
   <style>
@@ -80,10 +85,16 @@ animation finishes to perform some action.
       left: 0;
       right: 0;
       bottom: 0;
+    }
 
-      /* This resolves a rendering issue in Chrome 40 where the
+    :host([animating]) {
+      /* This resolves a rendering issue in Chrome (as of 40) where the
          ripple is not properly clipped by its parent (which may have
-         rounded corners. See: http://jsbin.com/temexa/4 */
+         rounded corners). See: http://jsbin.com/temexa/4
+
+         Note: We only apply this style conditionally. Otherwise, the browser
+         will create a new compositing layer for every ripple element on the
+         page, and that would be bad. */
       -webkit-transform: translate(0, 0);
       transform: translate3d(0, 0, 0);
     }
@@ -217,6 +228,10 @@ animation finishes to perform some action.
     Ripple.prototype = {
       get recenters() {
         return this.element.recenters;
+      },
+
+      get center() {
+        return this.element.center;
       },
 
       get mouseDownElapsed() {
@@ -376,19 +391,30 @@ animation finishes to perform some action.
       },
 
       downAction: function(event) {
+        var xCenter = this.containerMetrics.width / 2;
+        var yCenter = this.containerMetrics.height / 2;
+
         this.resetInteractionState();
         this.mouseDownStart = Utility.now();
 
-        this.xStart = event ?
-          event.detail.x - this.containerMetrics.boundingRect.left :
-          this.containerMetrics.width / 2;
-        this.yStart = event ?
-          event.detail.y - this.containerMetrics.boundingRect.top :
-          this.containerMetrics.height / 2;
+        if (this.center) {
+          this.xStart = xCenter;
+          this.yStart = yCenter;
+          this.slideDistance = Utility.distance(
+            this.xStart, this.yStart, this.xEnd, this.yEnd
+          );
+        } else {
+          this.xStart = event ?
+              event.detail.x - this.containerMetrics.boundingRect.left :
+              this.containerMetrics.width / 2;
+          this.yStart = event ?
+              event.detail.y - this.containerMetrics.boundingRect.top :
+              this.containerMetrics.height / 2;
+        }
 
         if (this.recenters) {
-          this.xEnd = this.containerMetrics.width / 2;
-          this.yEnd = this.containerMetrics.height / 2;
+          this.xEnd = xCenter;
+          this.yEnd = yCenter;
           this.slideDistance = Utility.distance(
             this.xStart, this.yStart, this.xEnd, this.yEnd
           );
@@ -465,6 +491,18 @@ animation finishes to perform some action.
         },
 
         /**
+         * If true, ripples will center inside its container
+         *
+         * @attribute recenters
+         * @type boolean
+         * @default false
+         */
+        center: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
          * A list of the visual ripples.
          *
          * @attribute ripples
@@ -476,6 +514,17 @@ animation finishes to perform some action.
           value: function() {
             return [];
           }
+        },
+
+        /**
+         * True when there are visible ripples animating within the
+         * element.
+         */
+        animating: {
+          type: Boolean,
+          readOnly: true,
+          reflectToAttribute: true,
+          value: false
         },
 
         _animating: {
@@ -549,6 +598,8 @@ animation finishes to perform some action.
         this.$.background.style.backgroundColor = ripple.color;
         this.ripples.push(ripple);
 
+        this._setAnimating(true);
+
         return ripple;
       },
 
@@ -562,6 +613,10 @@ animation finishes to perform some action.
         this.ripples.splice(rippleIndex, 1);
 
         ripple.remove();
+
+        if (!this.ripples.length) {
+          this._setAnimating(false);
+        }
       },
 
       animate: function() {

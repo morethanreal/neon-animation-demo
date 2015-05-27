@@ -12,6 +12,7 @@
   * [Running animations encapsulated in children nodes](#configuration-encapsulation)
 * [Page transitions](#page-transitions)
   * [Shared element animations](#shared-element)
+  * [Declarative page transitions](#declarative-page)
 * [Included animations](#animations)
 * [Demos](#demos)
 
@@ -65,7 +66,6 @@ An element might run different animations, for example it might do something dif
 Polymer({
   is: 'my-dialog',
   behaviors: [
-    Polymer.NeonAnimatableBehavior,
     Polymer.NeonAnimationRunnerBehavior
   ],
   properties: {
@@ -187,7 +187,9 @@ animationConfig: {
 <a name="page-transitions"></a>
 ## Page transitions
 
-The `neon-animated-pages` element manages a set of pages to switch between, and runs animations between the page transitions. It implements the `Polymer.IronSelectableBehavior` behavior. Each child node should implement `Polymer.IronAnimatableBehavior` and define the `entry` and `exit` animations. During a page transition, the `entry` animation is run on the new page and the `exit` animation is run on the old page.
+*The artist formerly known as `<core-animated-pages>`*
+
+The `neon-animated-pages` element manages a set of pages to switch between, and runs animations between the page transitions. It implements the `Polymer.IronSelectableBehavior` behavior. Each child node should implement `Polymer.NeonAnimatableBehavior` and define the `entry` and `exit` animations. During a page transition, the `entry` animation is run on the new page and the `exit` animation is run on the old page.
 
 <a name="shared-element"></a>
 ### Shared element animations
@@ -246,6 +248,25 @@ properties: {
 }
 ```
 
+<a name="declarative-page"></a>
+### Declarative page transitions
+
+For convenience, if you define the `entry-animation` and `exit-animation` attributes on `<neon-animated-pages>`, those animations will apply for all page transitions.
+
+For example:
+
+```js
+<neon-animated-pages id="pages" class="flex" selected="[[selected]]" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
+  <neon-animatable>1</neon-animatable>
+  <neon-animatable>2</neon-animatable>
+  <neon-animatable>3</neon-animatable>
+  <neon-animatable>4</neon-animatable>
+  <neon-animatable>5</neon-animatable>
+</neon-animated-pages>
+```
+
+The new page will slide in from the right, and the old page slide away to the left.
+
 <a name="animations"></a>
 ## Included animations
 
@@ -257,7 +278,10 @@ Single element animations:
  * `scale-up-animation` Animates transform from `scale(0)` to `scale(1)`.
  * `slide-down-animation` Animates transform from `translateY(-100%)` to `none`.
  * `slide-up-animation` Animates transform from `none` to `translateY(-100%)`.
- * `slide-up-scale-down-animation` Animates transform from `none` to `translate(0px,-200vh) scale(0.9,1)`.
+ * `slide-left-animation` Animates transform from `none` to `translateX(-100%)`;
+ * `slide-right-animation` Animates transform from `none` to `translateX(100%)`;
+ * `slide-from-left-animation` Animates transform from `translateX(-100%)` to `none`;
+ * `slide-from-right-animation` Animates transform from `translateX(100%)` to `none`;
  * `transform-animation` Animates a custom transform.
 
 Note that there is a restriction that only one transform animation can be applied on the same element at a time. Use the custom `transform-animation` to combine transform properties.
@@ -277,3 +301,4 @@ Group animations
  * [Animation on load](http://morethanreal.github.io/neon-animation-demo/bower_components/neon-animation/demo/load/index.html)
  * [List item to detail](http://morethanreal.github.io/neon-animation-demo/bower_components/neon-animation/demo/list/index.html) (For narrow width)
  * [Dots to squares](http://morethanreal.github.io/neon-animation-demo/bower_components/neon-animation/demo/tiles/index.html)
+ * [Declarative](http://morethanreal.github.io/neon-animation-demo/bower_components/neon-animation/demo/declarative/index.html)
